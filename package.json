@@ -1,0 +1,134 @@
+{
+  "name": "md-wysiwyg",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "0.1.0",
+  "publisher": "xsfeng",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "wysiwyg",
+    "editor",
+    "milkdown"
+  ],
+  "main": "./dist/extension.js",
+  "l10n": "./l10n",
+  "activationEvents": [],
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "mdWysiwyg.editor",
+        "displayName": "%editor.displayName%",
+        "selector": [
+          {
+            "filenamePattern": "*.md"
+          },
+          {
+            "filenamePattern": "*.markdown"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "mdWysiwyg.openEditor",
+        "title": "%command.openEditor%",
+        "category": "Markdown WYSIWYG",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "mdWysiwyg.openEditorToSide",
+        "title": "%command.openEditorToSide%",
+        "category": "Markdown WYSIWYG",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "mdWysiwyg.openSource",
+        "title": "%command.openSource%",
+        "category": "Markdown WYSIWYG",
+        "icon": "$(code)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "mdWysiwyg.openEditor",
+          "when": "editorLangId == markdown && activeEditor == workbench.editors.files.textFileEditor",
+          "group": "navigation"
+        },
+        {
+          "command": "mdWysiwyg.openSource",
+          "when": "activeCustomEditorId == mdWysiwyg.editor",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "mdWysiwyg.openEditor",
+          "when": "resourceLangId == markdown",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "mdWysiwyg.openEditor",
+          "when": "editorLangId == markdown || activeCustomEditorId == mdWysiwyg.editor"
+        },
+        {
+          "command": "mdWysiwyg.openEditorToSide",
+          "when": "editorLangId == markdown"
+        },
+        {
+          "command": "mdWysiwyg.openSource",
+          "when": "activeCustomEditorId == mdWysiwyg.editor"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Markdown WYSIWYG",
+      "properties": {
+        "mdWysiwyg.imageFolder": {
+          "type": "string",
+          "default": "assets",
+          "markdownDescription": "%config.imageFolder%"
+        },
+        "mdWysiwyg.maxWidth": {
+          "type": "number",
+          "default": 860,
+          "minimum": 0,
+          "markdownDescription": "%config.maxWidth%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc -p . --noEmit && tsc -p webview --noEmit",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"test/**/*.test.mts\"",
+    "test:e2e": "npm run build && node test/e2e/runTest.mjs",
+    "vscode:prepublish": "node esbuild.mjs --production",
+    "package": "vsce package --skip-license --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@codemirror/language": "^6.13.1",
+    "@codemirror/view": "^6.43.15",
+    "@lezer/highlight": "^1.2.5",
+    "@milkdown/crepe": "7.22.3",
+    "@milkdown/kit": "7.22.3",
+    "@types/node": "^22.20.5",
+    "@types/vscode": "~1.90.0",
+    "@vscode/test-electron": "^3.1.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.28.2",
+    "mermaid": "^12.2.0",
+    "typescript": "~5.9.3"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "displayName": "Markdown WYSIWYG Editor",
+  "description": "Edit Markdown files in a what-you-see-is-what-you-get editor, powered by Milkdown.",
+  "editor.displayName": "Markdown WYSIWYG",
+  "command.openEditor": "Open in WYSIWYG Editor",
+  "command.openEditorToSide": "Open WYSIWYG Editor to the Side",
+  "command.openSource": "Open Markdown Source",
+  "config.imageFolder": "Folder, relative to the Markdown file, where pasted or dropped images are saved. Leave empty to save next to the file.",
+  "config.maxWidth": "Maximum width of the editing area in pixels. `0` uses the full width."
+}

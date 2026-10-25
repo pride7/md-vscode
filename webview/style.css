@@ -1,0 +1,250 @@
+/* Maps VS Code theme colors onto Crepe's design tokens, so the editor follows
+   whatever color theme is active, including theme switches at runtime. */
+.milkdown {
+  --crepe-color-background: var(--vscode-editor-background);
+  --crepe-color-on-background: var(--vscode-editor-foreground);
+  --crepe-color-surface: var(--vscode-editorWidget-background);
+  --crepe-color-surface-low: var(--vscode-input-background);
+  --crepe-color-on-surface: var(--vscode-editorWidget-foreground, var(--vscode-editor-foreground));
+  --crepe-color-on-surface-variant: var(--vscode-descriptionForeground);
+  --crepe-color-outline: var(--vscode-descriptionForeground);
+  --crepe-color-primary: var(--vscode-textLink-foreground);
+  --crepe-color-secondary: var(--vscode-button-secondaryBackground);
+  --crepe-color-on-secondary: var(--vscode-button-secondaryForeground);
+  --crepe-color-inverse: var(--vscode-editorHoverWidget-background);
+  --crepe-color-on-inverse: var(--vscode-editorHoverWidget-foreground, var(--vscode-editor-foreground));
+  --crepe-color-inline-code: var(--vscode-textPreformat-foreground);
+  --crepe-color-error: var(--vscode-errorForeground);
+  --crepe-color-hover: var(--vscode-list-hoverBackground);
+  --crepe-color-selected: var(--vscode-editor-selectionBackground);
+  --crepe-color-inline-area: var(--vscode-textCodeBlock-background);
+
+  --crepe-base-font-size: 16px;
+  --crepe-font-default: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans CJK SC', 'Helvetica Neue', Arial, sans-serif;
+  --crepe-font-title: var(--crepe-font-default);
+  --crepe-font-code: var(--vscode-editor-font-family, Consolas, 'Courier New', monospace);
+
+  --crepe-shadow-1: 0 1px 4px 0 var(--vscode-widget-shadow, rgba(0, 0, 0, 0.3));
+  --crepe-shadow-2: 0 2px 8px 0 var(--vscode-widget-shadow, rgba(0, 0, 0, 0.3));
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+}
+
+/* VS Code's default webview padding would offset the floating menus. */
+body {
+  padding: 0 !important;
+}
+
+.milkdown .ProseMirror {
+  max-width: var(--md-max-width, 860px);
+  min-height: 100vh;
+  margin: 0 auto;
+  /* Left room is for the block drag handle. */
+  padding: 40px 64px 30vh;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .milkdown .ProseMirror {
+    padding: 24px 24px 30vh 48px;
+  }
+}
+
+/* Crepe's headings are sized for marketing pages; use document-like sizes. */
+.milkdown .ProseMirror h1,
+.milkdown .ProseMirror h2,
+.milkdown .ProseMirror h3,
+.milkdown .ProseMirror h4,
+.milkdown .ProseMirror h5,
+.milkdown .ProseMirror h6 {
+  font-weight: 600;
+  line-height: 1.35;
+}
+.milkdown .ProseMirror h1 {
+  font-size: 2em;
+  margin-top: 28px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--vscode-textSeparator-foreground, var(--vscode-widget-border, transparent));
+}
+.milkdown .ProseMirror h2 {
+  font-size: 1.5em;
+  margin-top: 24px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--vscode-textSeparator-foreground, var(--vscode-widget-border, transparent));
+}
+.milkdown .ProseMirror h3 {
+  font-size: 1.25em;
+  margin-top: 20px;
+}
+.milkdown .ProseMirror h4 {
+  font-size: 1.1em;
+  margin-top: 16px;
+}
+.milkdown .ProseMirror h5 {
+  font-size: 1em;
+  margin-top: 16px;
+}
+.milkdown .ProseMirror h6 {
+  font-size: 0.9em;
+  margin-top: 16px;
+  color: var(--vscode-descriptionForeground);
+}
+
+.milkdown .ProseMirror p {
+  line-height: 1.7;
+}
+
+.milkdown .ProseMirror blockquote {
+  color: var(--vscode-descriptionForeground);
+  padding-left: 20px;
+}
+.milkdown .ProseMirror blockquote::before {
+  background: var(--vscode-textBlockQuote-border, var(--crepe-color-selected));
+}
+
+.milkdown .ProseMirror a {
+  text-decoration: none;
+}
+.milkdown .ProseMirror a:hover {
+  text-decoration: underline;
+  color: var(--vscode-textLink-activeForeground, var(--crepe-color-primary));
+}
+
+#front-matter {
+  box-sizing: border-box;
+  max-width: var(--md-max-width, 860px);
+  margin: 16px auto 0;
+  padding: 0 64px;
+  color: var(--vscode-descriptionForeground);
+  font-family: var(--vscode-font-family);
+  font-size: 12px;
+}
+#front-matter summary {
+  cursor: pointer;
+  user-select: none;
+}
+#front-matter pre {
+  margin: 6px 0 0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  background: var(--vscode-textCodeBlock-background);
+  font-family: var(--vscode-editor-font-family, monospace);
+}
+#front-matter + #app .ProseMirror {
+  padding-top: 16px;
+}
+@media (max-width: 600px) {
+  #front-matter {
+    padding: 0 24px 0 48px;
+  }
+}
+
+/* Mermaid diagrams in code block previews. */
+.milkdown .milkdown-code-block .preview svg[id^='mermaid-'] {
+  max-width: 100%;
+  height: auto;
+}
+.milkdown .milkdown-code-block .preview:has(> svg[id^='mermaid-']) {
+  display: flex;
+  justify-content: center;
+}
+.milkdown .milkdown-code-block .mermaid-error {
+  color: var(--vscode-errorForeground);
+  white-space: pre-wrap;
+  font-family: var(--crepe-font-code);
+  font-size: 0.85em;
+}
+
+/* Syntax colors for code blocks (CodeMirror's classHighlighter), after Light+/Dark+. */
+body {
+  --tok-keyword: #0000ff;
+  --tok-string: #a31515;
+  --tok-string2: #811f3f;
+  --tok-number: #098658;
+  --tok-comment: #008000;
+  --tok-variable: #001080;
+  --tok-definition: #795e26;
+  --tok-type: #267f99;
+  --tok-meta: #616161;
+  --tok-heading: #800000;
+  --tok-link: #0070c1;
+  --tok-invalid: #cd3131;
+}
+body.vscode-dark,
+body.vscode-high-contrast:not(.vscode-high-contrast-light) {
+  --tok-keyword: #569cd6;
+  --tok-string: #ce9178;
+  --tok-string2: #d16969;
+  --tok-number: #b5cea8;
+  --tok-comment: #6a9955;
+  --tok-variable: #9cdcfe;
+  --tok-definition: #dcdcaa;
+  --tok-type: #4ec9b0;
+  --tok-meta: #9b9b9b;
+  --tok-heading: #569cd6;
+  --tok-link: #3794ff;
+  --tok-invalid: #f44747;
+}
+
+.tok-keyword,
+.tok-atom,
+.tok-bool {
+  color: var(--tok-keyword);
+}
+.tok-string,
+.tok-deleted {
+  color: var(--tok-string);
+}
+.tok-string2 {
+  color: var(--tok-string2);
+}
+.tok-number,
+.tok-inserted {
+  color: var(--tok-number);
+}
+.tok-comment {
+  color: var(--tok-comment);
+  font-style: italic;
+}
+.tok-variableName,
+.tok-variableName2,
+.tok-propertyName {
+  color: var(--tok-variable);
+}
+.tok-variableName.tok-definition {
+  color: var(--tok-definition);
+}
+.tok-typeName,
+.tok-className,
+.tok-namespace {
+  color: var(--tok-type);
+}
+.tok-meta,
+.tok-macroName {
+  color: var(--tok-meta);
+}
+.tok-heading {
+  color: var(--tok-heading);
+  font-weight: bold;
+}
+.tok-link,
+.tok-url {
+  color: var(--tok-link);
+}
+.tok-invalid {
+  color: var(--tok-invalid);
+}
+.tok-emphasis {
+  font-style: italic;
+}
+.tok-strong {
+  font-weight: bold;
+}

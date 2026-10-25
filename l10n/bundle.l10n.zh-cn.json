@@ -1,0 +1,5 @@
+{
+  "Failed to save image: {0}": "保存图片失败：{0}",
+  "Save the document before inserting images.": "请先保存文档，再插入图片。",
+  "Open a Markdown file first.": "请先打开一个 Markdown 文件。"
+}
