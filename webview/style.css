@@ -147,6 +147,30 @@ body {
   }
 }
 
+/* Blocks with a preview (math, Mermaid) show just the rendered result until the
+   cursor moves into them. The source is clipped rather than display: none so it
+   can still take focus from a click or the arrow keys. */
+.milkdown .milkdown-code-block:has(.preview-panel):not(:focus-within, .selected) {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+.milkdown .milkdown-code-block:has(.preview-panel):not(:focus-within, .selected):hover {
+  background: var(--crepe-color-surface);
+}
+.milkdown .milkdown-code-block:has(.preview-panel):not(:focus-within, .selected) .codemirror-host {
+  height: 0;
+  overflow: hidden;
+}
+.milkdown .milkdown-code-block:has(.preview-panel):not(:focus-within, .selected) :is(.tools, .preview-divider, .preview-label) {
+  display: none;
+}
+/* Showing and hiding the source is automatic, so the manual toggle would only fight it. */
+.milkdown .milkdown-code-block .tools .tools-button-group .preview-toggle-button {
+  display: none;
+}
+
 /* Mermaid diagrams in code block previews. */
 .milkdown .milkdown-code-block .preview svg[id^='mermaid-'] {
   max-width: 100%;

@@ -73,6 +73,7 @@ window.addEventListener('message', (event: MessageEvent<HostMessage>) => {
 
 installKeyboardGuards();
 installLinkHandler();
+installPreviewClick();
 vscode.postMessage({ type: 'ready' });
 
 async function init(text: string, language: string, config: WebviewConfig): Promise<void> {
@@ -124,7 +125,6 @@ function featureConfigs(t: Strings): CrepeConfig['featureConfigs'] {
       copyText: t.copy,
       previewLabel: t.preview,
       previewLoading: t.loading,
-      previewToggleText: (previewOnly) => (previewOnly ? t.edit : t.hide),
       renderPreview: renderMermaid,
     },
     [Crepe.Feature.ImageBlock]: {
@@ -315,6 +315,27 @@ function installLinkHandler(): void {
     },
     true,
   );
+}
+
+/**
+ * Math and Mermaid blocks show only their rendered preview until the cursor is
+ * in them (see style.css). Clicking the preview moves the cursor into the source.
+ */
+function installPreviewClick(): void {
+  document.getElementById('app')!.addEventListener('mousedown', (e) => {
+    const target = e.target as Element;
+    const editorDom = target.closest('.preview-panel')?.closest('.milkdown-code-block')?.querySelector('.cm-editor');
+    const cm = editorDom instanceof HTMLElement ? CodeMirrorView.findFromDOM(editorDom) : null;
+    if (!cm || e.button !== 0) {
+      return;
+    }
+    // Clicking the preview while editing must not take focus away and close the source.
+    e.preventDefault();
+    if (!cm.hasFocus) {
+      cm.focus();
+      cm.dispatch({ selection: { anchor: cm.state.doc.length } });
+    }
+  });
 }
 
 const codeMirrorTheme = CodeMirrorView.theme({

@@ -17,8 +17,6 @@ export interface Strings {
   searchLanguage: string;
   noResult: string;
   copy: string;
-  edit: string;
-  hide: string;
   preview: string;
   loading: string;
   linkPlaceholder: string;
@@ -48,8 +46,6 @@ const en: Strings = {
   searchLanguage: 'Search language',
   noResult: 'No result',
   copy: 'Copy',
-  edit: 'Edit',
-  hide: 'Hide',
   preview: 'Preview',
   loading: 'Loading…',
   linkPlaceholder: 'Paste link…',
@@ -79,8 +75,6 @@ const zhCN: Strings = {
   searchLanguage: '搜索语言',
   noResult: '无结果',
   copy: '复制',
-  edit: '编辑',
-  hide: '隐藏',
   preview: '预览',
   loading: '加载中…',
   linkPlaceholder: '粘贴链接…',
