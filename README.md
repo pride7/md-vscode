@@ -1,36 +1,46 @@
-# Markdown 所见即所得编辑器
+# Markdown WYSIWYG (Milkdown)
 
-在 VS Code 里像 Typora 一样，所见即所得地编辑 Markdown 文件。编辑器内核是 [Milkdown Crepe](https://milkdown.dev)（基于 ProseMirror + remark）。
+English | [简体中文](README.zh-CN.md)
 
-## 功能
+Edit Markdown files in VS Code the way you would in Typora: what you see is what you get. The editor is built on [Milkdown Crepe](https://milkdown.dev) (ProseMirror + remark).
 
-- **所见即所得编辑**：标题、列表、任务列表、引用、表格、链接、图片等都直接以渲染后的样子编辑
-- **斜杠菜单**：输入 `/` 插入标题、列表、代码块、表格、公式、图片等
-- **格式工具栏**：选中文字后弹出，可设置粗体、斜体、删除线、行内代码和链接
-- **拖动块**：鼠标移到段落左侧，可以拖动整块内容，或在下方插入新块
-- **代码块**：基于 CodeMirror，支持语法高亮，可切换语言
-- **数学公式**：行内 `$...$` 和块级 `$$...$$`，基于 KaTeX。块级公式直接显示渲染结果，点击公式（或用方向键移进去）即可编辑源码，光标离开后自动收起
-- **Mermaid 图表**：```` ```mermaid ```` 代码块直接显示为图表，编辑方式同块级公式
-- **悬浮目录**：像 Notion 一样，编辑器右侧有一列短横线代表各级标题，鼠标移上去展开成目录，点击跳转，并高亮当前所在章节
-- **图片粘贴/拖入**：自动保存到 Markdown 文件旁边的 `assets/` 文件夹，并插入相对路径
-- **跟随 VS Code 主题**：浅色、深色和高对比度主题自动适配
-- **与源码双向同步**：可以和普通文本编辑器并排打开同一个文件，两边的修改实时同步
-- **保留 Front Matter**：文件开头的 YAML（`---`）或 TOML（`+++`）元数据会原样保留
+## Installation
 
-## 使用方法
+Search for "Markdown WYSIWYG (Milkdown)" in the Extensions view, or press `Ctrl+P` to open Quick Open and run:
 
-| 操作 | 方式 |
+```
+ext install pride7.md-wysiwyg
+```
+
+## Features
+
+- **WYSIWYG editing**: headings, lists, task lists, blockquotes, tables, links and images are edited the way they render
+- **Slash menu**: type `/` to insert headings, lists, code blocks, tables, math, images and more
+- **Formatting toolbar**: appears when you select text, with bold, italic, strikethrough, inline code and links
+- **Drag handles**: hover to the left of a paragraph to drag the whole block, or insert a new block below it
+- **Code blocks**: CodeMirror with syntax highlighting and a language picker
+- **Math**: inline `$...$` and block `$$...$$`, rendered with KaTeX. Block math shows the rendered result; click it (or move into it with the arrow keys) to edit the source, and it collapses again when the cursor leaves
+- **Mermaid diagrams**: ```` ```mermaid ```` code blocks show as diagrams and are edited the same way as block math
+- **Floating table of contents**: as in Notion, short lines at the right edge of the editor stand for the headings. Hover them to expand a table of contents, click a heading to jump to it, and the current section is highlighted
+- **Paste or drop images**: images are saved to an `assets/` folder next to the Markdown file and inserted with a relative path
+- **Follows your VS Code theme**: light, dark and high-contrast themes are all supported
+- **Two-way sync with the source**: open the same file in a regular text editor side by side, and edits on either side show up in the other right away
+- **Front matter is kept**: YAML (`---`) or TOML (`+++`) metadata at the top of the file is preserved as is
+
+## Usage
+
+| Action | How |
 | --- | --- |
-| 在源码和所见即所得之间切换 | 按 `Ctrl+E`（macOS 上是 `Cmd+E`），或点击编辑器右上角的 👁 / `</>` 按钮 |
-| 用所见即所得模式打开 | 也可以在资源管理器中右键 → “在所见即所得编辑器中打开” |
-| 在侧边打开 | 命令面板 → “Markdown WYSIWYG: 在侧边打开所见即所得编辑器” |
-| 打开链接 | 按住 `Ctrl`（macOS 上是 `Cmd`）点击链接。相对路径的 `.md` 文件会用本编辑器打开 |
+| Switch between source and WYSIWYG | Press `Ctrl+E` (`Cmd+E` on macOS), or click the 👁 / `</>` button at the top right of the editor |
+| Open in WYSIWYG mode | You can also right-click a file in the Explorer → "Open in WYSIWYG Editor" |
+| Open to the side | Command Palette → "Markdown WYSIWYG: Open WYSIWYG Editor to the Side" |
+| Follow a link | Hold `Ctrl` (`Cmd` on macOS) and click the link. Relative links to `.md` files open in this editor |
 
-`Ctrl+E` 只在 Markdown 编辑器里生效，可以在“键盘快捷方式”中搜索“切换源码 / 所见即所得”改成别的键。所见即所得模式下行内代码没有快捷键，用格式工具栏或直接输入 `` `代码` ``。
+`Ctrl+E` only works in Markdown editors. To use a different key, search for "Toggle Source / WYSIWYG" in Keyboard Shortcuts. Inline code has no shortcut in WYSIWYG mode; use the formatting toolbar or type `` `code` `` directly.
 
-### 设为 Markdown 的默认编辑器
+### Make it the default editor for Markdown
 
-插件默认不接管 `.md` 文件的打开方式。如果希望双击 `.md` 文件时直接进入所见即所得模式，在 `settings.json` 中加入：
+By default the extension does not change how `.md` files open. To open them in WYSIWYG mode when you double-click them, add this to `settings.json`:
 
 ```json
 "workbench.editorAssociations": {
@@ -38,56 +48,60 @@
 }
 ```
 
-## 设置
+## Settings
 
-| 设置项 | 默认值 | 说明 |
+| Setting | Default | Description |
 | --- | --- | --- |
-| `mdWysiwyg.imageFolder` | `assets` | 粘贴/拖入的图片保存到哪个文件夹（相对于 Markdown 文件）。留空则与文件保存在同一目录 |
-| `mdWysiwyg.maxWidth` | `0` | 编辑区域最大宽度（像素），`0` 表示占满整个宽度 |
-| `mdWysiwyg.tableOfContents` | `true` | 在编辑器右侧显示悬浮目录（至少有两个标题时才出现） |
+| `mdWysiwyg.imageFolder` | `assets` | Folder, relative to the Markdown file, where pasted or dropped images are saved. Leave empty to save them next to the file |
+| `mdWysiwyg.maxWidth` | `0` | Maximum width of the editing area in pixels. `0` uses the full width |
+| `mdWysiwyg.tableOfContents` | `true` | Show the floating table of contents at the right edge of the editor (it appears only when there are at least two headings) |
 
-## 已知限制
+## Known limitations
 
-所见即所得编辑器先把 Markdown 解析成文档结构，保存时再重新生成 Markdown。所以**在所见即所得模式下第一次修改文件时**，一些写法会被统一成标准格式（内容和渲染效果不变）：
+The WYSIWYG editor parses Markdown into a document tree and turns it back into Markdown when you save. So **the first time you edit a file in WYSIWYG mode**, some syntax is rewritten into a standard form (the content and how it renders stay the same):
 
-- 引用式链接（链接地址写在文末的写法）会被改写成行内链接
-- 缩进式代码块会被改写成 ```` ``` ```` 围栏代码块
-- 表格的列宽会被重新对齐
-- 部分特殊字符会被转义（例如 `2 * 3` 变成 `2 \* 3`）
+- Reference-style links (with the URL written at the end of the file) become inline links
+- Indented code blocks become ```` ``` ```` fenced code blocks
+- Table columns are realigned
+- Some special characters are escaped (for example, `2 * 3` becomes `2 \* 3`)
 
-只打开、不修改的文件不会有任何变化；在源码编辑器中的修改也不会触发格式化。Front Matter 只能在源码模式下编辑。
+Files you only open without editing are never changed, and edits in the source editor never trigger this rewriting. Front matter can only be edited in source mode.
 
-## 开发
+## Development
 
 ```bash
 npm install
-npm run build       # 构建到 dist/
-npm run watch       # 监听文件变化自动构建
-npm run typecheck   # 类型检查
-npm test            # 单元测试
-npm run test:e2e    # 在真实 VS Code 中跑集成测试
-npm run package     # 打包成 .vsix
-npm run install-local  # 打包并安装到本机 VS Code（覆盖已装的同版本）
+npm run build          # build into dist/
+npm run watch          # rebuild on file changes
+npm run typecheck      # type-check
+npm test               # unit tests
+npm run test:e2e       # integration tests in a real VS Code
+npm run package        # package as a .vsix
+npm run install-local  # package and install into your local VS Code (replaces an installed copy of the same version)
 ```
 
-`install-local` 装完后，在已经打开的 VS Code 窗口里执行 `Developer: Reload Window` 或点扩展视图里的“重启扩展”，才会生效。
+After `install-local`, run `Developer: Reload Window` in any VS Code window that is already open, or click "Restart Extensions" in the Extensions view, for the new build to take effect.
 
-在 VS Code 中按 `F5` 会启动一个加载了本插件的新窗口，并打开 `samples/` 示例文件夹。
+Press `F5` in VS Code to open a new window with the extension loaded and the `samples/` folder open.
 
-`test:e2e` 默认会下载一份 VS Code。如果想用本机已安装的 VS Code，设置环境变量 `VSCODE_EXECUTABLE` 指向 `Code.exe`。
+`test:e2e` downloads a copy of VS Code by default. To use the VS Code installed on your machine instead, set the `VSCODE_EXECUTABLE` environment variable to the path of `Code.exe`.
 
-### 目录结构
+### Project structure
 
 ```
-src/                       插件端（运行在 VS Code 扩展进程中）
-  extension.ts             入口，注册编辑器和命令
-  markdownEditorProvider.ts  自定义编辑器：webview 与 TextDocument 的同步、保存、图片、链接
-  textDiff.ts              把整篇文本替换压缩成最小编辑范围
-webview/                   编辑器页面（运行在 webview 中）
-  main.ts                  创建 Milkdown 编辑器，处理与插件端的消息
-  markdownFormat.ts        Markdown 输出格式调整、Front Matter 处理
-  style.css                把 VS Code 主题颜色映射到编辑器
-  i18n.ts                  界面文字（中/英）
-test/                      单元测试和集成测试
-samples/                   示例文档
+src/                       extension side (runs in the VS Code extension host)
+  extension.ts             entry point, registers the editor and commands
+  markdownEditorProvider.ts  custom editor: syncs the webview with the TextDocument, saving, images, links
+  textDiff.ts              shrinks a whole-document replacement into the smallest edit
+webview/                   editor page (runs in the webview)
+  main.ts                  creates the Milkdown editor and handles messages from the extension
+  markdownFormat.ts        Markdown output tweaks and front matter handling
+  style.css                maps VS Code theme colors onto the editor
+  i18n.ts                  UI strings (Chinese / English)
+test/                      unit and integration tests
+samples/                   sample documents
 ```
+
+## License
+
+[MIT](LICENSE)
