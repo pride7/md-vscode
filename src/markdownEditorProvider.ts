@@ -269,7 +269,9 @@ class EditorSession implements vscode.Disposable {
 
   private readConfig(): WebviewConfig {
     const config = vscode.workspace.getConfiguration('mdWysiwyg', this.document.uri);
-    return { maxWidth: config.get<number>('maxWidth', 860) };
+    return {
+      maxWidth: config.get<number>('maxWidth', 0),
+    };
   }
 
   private post(message: unknown): Thenable<boolean> {

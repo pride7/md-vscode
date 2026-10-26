@@ -101,7 +101,7 @@
         },
         "mdWysiwyg.maxWidth": {
           "type": "number",
-          "default": 860,
+          "default": 0,
           "minimum": 0,
           "markdownDescription": "%config.maxWidth%"
         }

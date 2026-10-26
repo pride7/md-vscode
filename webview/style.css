@@ -43,7 +43,7 @@ body {
 }
 
 .milkdown .ProseMirror {
-  max-width: var(--md-max-width, 860px);
+  max-width: var(--md-max-width, none);
   min-height: 100vh;
   margin: 0 auto;
   /* Left room is for the block drag handle. */
@@ -119,7 +119,7 @@ body {
 
 #front-matter {
   box-sizing: border-box;
-  max-width: var(--md-max-width, 860px);
+  max-width: var(--md-max-width, none);
   margin: 16px auto 0;
   padding: 0 64px;
   color: var(--vscode-descriptionForeground);
