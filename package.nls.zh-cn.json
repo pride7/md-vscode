@@ -1,5 +1,5 @@
 {
-  "displayName": "Markdown 所见即所得编辑器",
+  "displayName": "Verso Markdown 编辑器",
   "description": "以所见即所得的方式编辑 Markdown 文件，基于 Milkdown。",
   "editor.displayName": "Markdown 所见即所得",
   "command.openEditor": "在所见即所得编辑器中打开",

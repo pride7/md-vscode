@@ -1,5 +1,5 @@
 {
-  "displayName": "Markdown WYSIWYG (Milkdown)",
+  "displayName": "Verso Markdown Editor",
   "description": "Edit Markdown files in a what-you-see-is-what-you-get editor, powered by Milkdown.",
   "editor.displayName": "Markdown WYSIWYG",
   "command.openEditor": "Open in WYSIWYG Editor",

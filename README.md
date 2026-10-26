@@ -1,4 +1,4 @@
-# Markdown WYSIWYG (Milkdown)
+# Verso Markdown Editor
 
 English | [简体中文](README.zh-CN.md)
 
@@ -6,7 +6,7 @@ Edit Markdown files in VS Code the way you would in Typora: what you see is what
 
 ## Installation
 
-Search for "Markdown WYSIWYG (Milkdown)" in the Extensions view, or press `Ctrl+P` to open Quick Open and run:
+Search for "Verso Markdown Editor" in the Extensions view, or press `Ctrl+P` to open Quick Open and run:
 
 ```
 ext install pride7.verso

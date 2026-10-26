@@ -1,4 +1,4 @@
-# Markdown 所见即所得编辑器
+# Verso Markdown 编辑器
 
 [English](README.md) | 简体中文
 
@@ -6,7 +6,7 @@
 
 ## 安装
 
-在扩展视图中搜索 “Markdown WYSIWYG (Milkdown)” 安装，或者按 `Ctrl+P` 打开快速打开，输入：
+在扩展视图中搜索 “Verso Markdown Editor” 安装，或者按 `Ctrl+P` 打开快速打开，输入：
 
 ```
 ext install pride7.verso
