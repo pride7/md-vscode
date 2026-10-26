@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0
 
 - Toolbar at the top of the editor for paragraphs and headings, bold, italic, strikethrough, lists, quotes, links and images, with inline code, code blocks, math, tables and dividers under ⋯. Turn it off with `mdWysiwyg.toolbar`
 
