@@ -54,6 +54,19 @@
         "title": "%command.openSource%",
         "category": "Markdown WYSIWYG",
         "icon": "$(code)"
+      },
+      {
+        "command": "mdWysiwyg.toggleEditor",
+        "title": "%command.toggleEditor%",
+        "category": "Markdown WYSIWYG"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "mdWysiwyg.toggleEditor",
+        "key": "ctrl+e",
+        "mac": "cmd+e",
+        "when": "(editorTextFocus && editorLangId == markdown && activeEditor == workbench.editors.files.textFileEditor) || (activeCustomEditorId == mdWysiwyg.editor && !inQuickOpen && !sideBarFocus && !panelFocus && !auxiliaryBarFocus)"
       }
     ],
     "menus": {
@@ -88,6 +101,10 @@
         {
           "command": "mdWysiwyg.openSource",
           "when": "activeCustomEditorId == mdWysiwyg.editor"
+        },
+        {
+          "command": "mdWysiwyg.toggleEditor",
+          "when": "editorLangId == markdown || activeCustomEditorId == mdWysiwyg.editor"
         }
       ]
     },

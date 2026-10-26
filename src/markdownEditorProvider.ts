@@ -23,18 +23,29 @@ export class MarkdownEditorProvider implements vscode.CustomTextEditorProvider {
 
   private readonly sessions = new Set<EditorSession>();
 
-  static register(context: vscode.ExtensionContext): vscode.Disposable {
+  static register(context: vscode.ExtensionContext): MarkdownEditorProvider {
     const provider = new MarkdownEditorProvider(context);
-    return vscode.Disposable.from(
+    context.subscriptions.push(
       vscode.window.registerCustomEditorProvider(MarkdownEditorProvider.viewType, provider, {
         webviewOptions: { retainContextWhenHidden: true, enableFindWidget: true },
         supportsMultipleEditorsPerDocument: true,
       }),
       vscode.workspace.onWillSaveTextDocument((e) => provider.onWillSave(e)),
     );
+    return provider;
   }
 
   private constructor(private readonly context: vscode.ExtensionContext) {}
+
+  /** Brings edits that the webviews showing `uri` haven't reported yet into the document. */
+  async sync(uri: vscode.Uri): Promise<void> {
+    const key = uri.toString();
+    for (const session of this.sessions) {
+      if (session.document.uri.toString() === key) {
+        await session.sync();
+      }
+    }
+  }
 
   resolveCustomTextEditor(document: vscode.TextDocument, panel: vscode.WebviewPanel): void {
     const session = new EditorSession(this.context.extensionUri, document, panel);
@@ -75,6 +86,8 @@ class EditorSession implements vscode.Disposable {
   private lastSynced: string;
   /** Serializes edits coming from the webview so they never interleave. */
   private editQueue: Promise<void> = Promise.resolve();
+  /** Until the webview script runs there are no local edits, and requests would go unanswered. */
+  private webviewReady = false;
   private nextRequestId = 1;
   private readonly pendingRequests = new Map<number, (text: string | null) => void>();
   private readonly disposables: vscode.Disposable[] = [];
@@ -133,9 +146,22 @@ class EditorSession implements vscode.Disposable {
     return [vscode.TextEdit.replace(range, change.text)];
   }
 
+  /** Applies edits the webview has made but not reported yet, e.g. before its tab closes. */
+  async sync(): Promise<void> {
+    if (!this.webviewReady) {
+      return;
+    }
+    const text = await this.requestMarkdown();
+    if (text !== null) {
+      this.enqueueEdit(text);
+    }
+    await this.editQueue;
+  }
+
   private onMessage(msg: WebviewMessage): void {
     switch (msg.type) {
       case 'ready':
+        this.webviewReady = true;
         this.lastSynced = this.document.getText();
         void this.post({
           type: 'init',

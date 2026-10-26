@@ -2,6 +2,7 @@ import { Crepe, type CrepeConfig } from '@milkdown/crepe';
 import '@milkdown/crepe/theme/common/style.css';
 import './style.css';
 import { editorViewCtx, parserCtx } from '@milkdown/kit/core';
+import { inlineCodeKeymap } from '@milkdown/kit/preset/commonmark';
 import type { Node as ProseNode } from '@milkdown/kit/prose/model';
 import type { EditorView } from '@milkdown/kit/prose/view';
 import { syntaxHighlighting } from '@codemirror/language';
@@ -90,6 +91,14 @@ async function init(text: string, language: string, config: WebviewConfig): Prom
     featureConfigs: featureConfigs(strings),
   });
   configureMarkdown(editor.editor);
+  // Ctrl/Cmd+E switches to the source view. Keys reach VS Code's keybindings
+  // even when the editor handles them, so it must not also toggle inline code.
+  editor.editor.config((ctx) => {
+    ctx.update(inlineCodeKeymap.key, (prev) => ({
+      ...prev,
+      ToggleInlineCode: { ...prev.ToggleInlineCode, shortcuts: [] },
+    }));
+  });
   editor.on((listener) => {
     listener.markdownUpdated(() => sendLocalChanges());
   });

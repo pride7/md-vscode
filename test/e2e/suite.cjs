@@ -92,6 +92,35 @@ test('toggles between source and WYSIWYG in place', async () => {
   await vscode.commands.executeCommand('workbench.action.closeAllEditors');
 });
 
+test('the toggle command switches either way without touching the document', async () => {
+  const uri = createFile('toggle-command.md', ORIGINAL);
+  await vscode.window.showTextDocument(uri);
+  await waitFor('text editor tab', () => tabsFor(uri).some(isTextTab));
+
+  await vscode.commands.executeCommand('mdWysiwyg.toggleEditor');
+  await waitFor('only the WYSIWYG tab', () => {
+    const tabs = tabsFor(uri);
+    return tabs.length === 1 && isCustomTab(tabs[0]);
+  });
+  // Give the webview time to start, so switching back has to ask it for unsynced edits.
+  await sleep(4000);
+
+  const start = Date.now();
+  await vscode.commands.executeCommand('mdWysiwyg.toggleEditor');
+  const elapsed = Date.now() - start;
+  await waitFor('only the source tab', () => {
+    const tabs = tabsFor(uri);
+    return tabs.length === 1 && isTextTab(tabs[0]);
+  });
+  // The sync request times out after 1s when the webview doesn't answer.
+  assert.ok(elapsed < 900, `switching took ${elapsed}ms; the webview did not answer the sync request`);
+
+  const document = await vscode.workspace.openTextDocument(uri);
+  assert.equal(document.isDirty, false);
+  assert.equal(document.getText(), ORIGINAL);
+  await vscode.commands.executeCommand('workbench.action.closeAllEditors');
+});
+
 test('reopening the WYSIWYG editor does not modify the document', async () => {
   const uri = createFile('reopen.md', ORIGINAL);
   await vscode.commands.executeCommand('vscode.openWith', uri, VIEW_TYPE);
