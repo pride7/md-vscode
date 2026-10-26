@@ -10,6 +10,7 @@ import { EditorView as CodeMirrorView } from '@codemirror/view';
 import { classHighlighter } from '@lezer/highlight';
 import { getStrings, type Strings } from './i18n';
 import { configureMarkdown, splitFrontMatter } from './markdownFormat';
+import { TableOfContents } from './toc';
 
 interface VsCodeApi {
   postMessage(message: unknown): void;
@@ -18,6 +19,7 @@ declare function acquireVsCodeApi(): VsCodeApi;
 
 interface WebviewConfig {
   maxWidth: number;
+  tableOfContents: boolean;
 }
 
 /** Messages the extension sends to the webview. */
@@ -39,6 +41,7 @@ let pendingText: string | undefined;
 /** Front matter is kept out of the editor and written back verbatim. */
 let frontMatter = '';
 let strings: Strings = getStrings('en');
+let toc: TableOfContents | undefined;
 
 let nextUploadId = 1;
 const pendingUploads = new Map<number, { resolve: (url: string) => void; reject: (err: Error) => void }>();
@@ -81,8 +84,9 @@ async function init(text: string, language: string, config: WebviewConfig): Prom
     return;
   }
   initializing = true;
-  applyConfig(config);
   strings = getStrings(language);
+  toc = new TableOfContents(strings.tableOfContents);
+  applyConfig(config);
 
   const { frontMatter: initialFrontMatter, body } = splitFrontMatter(text);
   setFrontMatter(initialFrontMatter);
@@ -92,6 +96,7 @@ async function init(text: string, language: string, config: WebviewConfig): Prom
     featureConfigs: featureConfigs(strings),
   });
   configureMarkdown(editor.editor);
+  editor.editor.use(toc.plugin);
   // Ctrl/Cmd+E switches to the source view. Keys reach VS Code's keybindings
   // even when the editor handles them, so it must not also toggle inline code.
   editor.editor.config((ctx) => {
@@ -253,6 +258,7 @@ function setFrontMatter(value: string): void {
 function applyConfig(config: WebviewConfig): void {
   const width = config.maxWidth > 0 ? `${config.maxWidth}px` : 'none';
   document.documentElement.style.setProperty('--md-max-width', width);
+  toc?.setEnabled(config.tableOfContents);
 }
 
 function uploadImage(file: File): Promise<string> {

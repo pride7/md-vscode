@@ -25,6 +25,7 @@ export interface Strings {
   orPasteLink: string;
   caption: string;
   frontMatter: string;
+  tableOfContents: string;
 }
 
 const en: Strings = {
@@ -54,6 +55,7 @@ const en: Strings = {
   orPasteLink: 'or paste link',
   caption: 'Write image caption',
   frontMatter: 'Front matter (edit in source view)',
+  tableOfContents: 'Table of contents',
 };
 
 const zhCN: Strings = {
@@ -83,6 +85,7 @@ const zhCN: Strings = {
   orPasteLink: '或粘贴链接',
   caption: '添加图片说明',
   frontMatter: 'Front Matter 元数据（请在源码视图中编辑）',
+  tableOfContents: '目录',
 };
 
 export function getStrings(language: string): Strings {

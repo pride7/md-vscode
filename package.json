@@ -121,6 +121,11 @@
           "default": 0,
           "minimum": 0,
           "markdownDescription": "%config.maxWidth%"
+        },
+        "mdWysiwyg.tableOfContents": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%config.tableOfContents%"
         }
       }
     }
