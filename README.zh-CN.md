@@ -9,7 +9,7 @@
 在扩展视图中搜索 “Verso Markdown Editor” 安装，或者按 `Ctrl+P` 打开快速打开，输入：
 
 ```
-ext install pride7.verso
+ext install pride7.verso-markdown-editor
 ```
 
 ## 功能
