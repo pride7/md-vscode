@@ -67,7 +67,10 @@ npm run typecheck   # 类型检查
 npm test            # 单元测试
 npm run test:e2e    # 在真实 VS Code 中跑集成测试
 npm run package     # 打包成 .vsix
+npm run install-local  # 打包并安装到本机 VS Code（覆盖已装的同版本）
 ```
+
+`install-local` 装完后，在已经打开的 VS Code 窗口里执行 `Developer: Reload Window` 或点扩展视图里的“重启扩展”，才会生效。
 
 在 VS Code 中按 `F5` 会启动一个加载了本插件的新窗口，并打开 `samples/` 示例文件夹。
 
