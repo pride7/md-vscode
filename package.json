@@ -50,25 +50,25 @@
       {
         "command": "mdWysiwyg.openEditor",
         "title": "%command.openEditor%",
-        "category": "Markdown WYSIWYG",
+        "category": "Verso",
         "icon": "$(eye)"
       },
       {
         "command": "mdWysiwyg.openEditorToSide",
         "title": "%command.openEditorToSide%",
-        "category": "Markdown WYSIWYG",
+        "category": "Verso",
         "icon": "$(open-preview)"
       },
       {
         "command": "mdWysiwyg.openSource",
         "title": "%command.openSource%",
-        "category": "Markdown WYSIWYG",
+        "category": "Verso",
         "icon": "$(code)"
       },
       {
         "command": "mdWysiwyg.toggleEditor",
         "title": "%command.toggleEditor%",
-        "category": "Markdown WYSIWYG"
+        "category": "Verso"
       }
     ],
     "keybindings": [
@@ -119,7 +119,7 @@
       ]
     },
     "configuration": {
-      "title": "Markdown WYSIWYG",
+      "title": "Verso",
       "properties": {
         "mdWysiwyg.imageFolder": {
           "type": "string",

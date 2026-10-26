@@ -33,7 +33,7 @@ ext install pride7.verso
 | --- | --- |
 | Switch between source and WYSIWYG | Press `Ctrl+E` (`Cmd+E` on macOS), or click the 👁 / `</>` button at the top right of the editor |
 | Open in WYSIWYG mode | You can also right-click a file in the Explorer → "Open in WYSIWYG Editor" |
-| Open to the side | Command Palette → "Markdown WYSIWYG: Open WYSIWYG Editor to the Side" |
+| Open to the side | Command Palette → "Verso: Open WYSIWYG Editor to the Side" |
 | Follow a link | Hold `Ctrl` (`Cmd` on macOS) and click the link. Relative links to `.md` files open in this editor |
 
 `Ctrl+E` only works in Markdown editors. To use a different key, search for "Toggle Source / WYSIWYG" in Keyboard Shortcuts. Inline code has no shortcut in WYSIWYG mode; use the formatting toolbar or type `` `code` `` directly.
