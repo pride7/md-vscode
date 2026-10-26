@@ -35,6 +35,8 @@ ext install pride7.verso
 | Open in WYSIWYG mode | You can also right-click a file in the Explorer → "Open in WYSIWYG Editor" |
 | Open to the side | Command Palette → "Verso: Open WYSIWYG Editor to the Side" |
 | Follow a link | Hold `Ctrl` (`Cmd` on macOS) and click the link. Relative links to `.md` files open in this editor |
+| Preview an image | Double-click the image to view it over the editor. If it's scaled down, click it to toggle actual size; click outside it or press `Esc` to close |
+| Open an image file | Hold `Ctrl` (`Cmd` on macOS) and click the image to open it in VS Code's image viewer |
 
 `Ctrl+E` only works in Markdown editors. To use a different key, search for "Toggle Source / WYSIWYG" in Keyboard Shortcuts. Inline code has no shortcut in WYSIWYG mode; use the formatting toolbar or type `` `code` `` directly.
 

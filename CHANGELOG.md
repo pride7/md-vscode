@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Double-click an image to preview it over the editor, with a toggle to actual size
+- Ctrl/Cmd+click an image to open the file in VS Code
+
 ## 0.1.0
 
 First release.

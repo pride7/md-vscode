@@ -9,6 +9,7 @@ import { syntaxHighlighting } from '@codemirror/language';
 import { EditorView as CodeMirrorView } from '@codemirror/view';
 import { classHighlighter } from '@lezer/highlight';
 import { getStrings, type Strings } from './i18n';
+import { imageAt, showImagePreview } from './imagePreview';
 import { configureMarkdown, splitFrontMatter } from './markdownFormat';
 import { TableOfContents } from './toc';
 
@@ -76,6 +77,7 @@ window.addEventListener('message', (event: MessageEvent<HostMessage>) => {
 
 installKeyboardGuards();
 installLinkHandler();
+installImageHandlers();
 installPreviewClick();
 vscode.postMessage({ type: 'ready' });
 
@@ -321,6 +323,34 @@ function installLinkHandler(): void {
     },
     true,
   );
+}
+
+/**
+ * Double-clicking an image previews it over the editor. Ctrl/Cmd+click opens
+ * the image file in VS Code, the same way as links.
+ */
+function installImageHandlers(): void {
+  const app = document.getElementById('app')!;
+  app.addEventListener('dblclick', (e) => {
+    const img = imageAt(e.target);
+    if (img) {
+      showImagePreview(img);
+    }
+  });
+  app.addEventListener('click', (e) => {
+    const img = imageAt(e.target);
+    // A linked image opens its link instead (installLinkHandler).
+    if (!img || !(e.ctrlKey || e.metaKey) || img.closest('a[href]')) {
+      return;
+    }
+    const src = img.getAttribute('src')!;
+    if (/^(data|blob):/i.test(src)) {
+      // Embedded images have no file to open.
+      showImagePreview(img);
+    } else {
+      vscode.postMessage({ type: 'openLink', href: src });
+    }
+  });
 }
 
 /**
