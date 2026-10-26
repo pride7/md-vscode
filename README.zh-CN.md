@@ -9,7 +9,7 @@
 在扩展视图中搜索 “Markdown WYSIWYG (Milkdown)” 安装，或者按 `Ctrl+P` 打开快速打开，输入：
 
 ```
-ext install pride7.md-wysiwyg
+ext install pride7.markdown-wysiwyg-milkdown
 ```
 
 ## 功能

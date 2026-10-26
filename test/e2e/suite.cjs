@@ -132,7 +132,7 @@ test('reopening the WYSIWYG editor does not modify the document', async () => {
 });
 
 exports.run = async function run() {
-  const extension = vscode.extensions.all.find((ext) => ext.packageJSON.name === 'md-wysiwyg');
+  const extension = vscode.extensions.all.find((ext) => ext.packageJSON.name === 'markdown-wysiwyg-milkdown');
   assert.ok(extension, 'extension under test is not loaded');
   await extension.activate();
 
