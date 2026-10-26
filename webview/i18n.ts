@@ -26,6 +26,13 @@ export interface Strings {
   caption: string;
   frontMatter: string;
   tableOfContents: string;
+  toolbar: string;
+  bold: string;
+  italic: string;
+  strikethrough: string;
+  link: string;
+  inlineCode: string;
+  more: string;
 }
 
 const en: Strings = {
@@ -56,6 +63,13 @@ const en: Strings = {
   caption: 'Write image caption',
   frontMatter: 'Front matter (edit in source view)',
   tableOfContents: 'Table of contents',
+  toolbar: 'Formatting',
+  bold: 'Bold',
+  italic: 'Italic',
+  strikethrough: 'Strikethrough',
+  link: 'Link',
+  inlineCode: 'Inline Code',
+  more: 'More',
 };
 
 const zhCN: Strings = {
@@ -86,6 +100,13 @@ const zhCN: Strings = {
   caption: '添加图片说明',
   frontMatter: 'Front Matter 元数据（请在源码视图中编辑）',
   tableOfContents: '目录',
+  toolbar: '格式',
+  bold: '粗体',
+  italic: '斜体',
+  strikethrough: '删除线',
+  link: '链接',
+  inlineCode: '行内代码',
+  more: '更多',
 };
 
 export function getStrings(language: string): Strings {

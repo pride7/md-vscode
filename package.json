@@ -136,6 +136,11 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "%config.tableOfContents%"
+        },
+        "mdWysiwyg.toolbar": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%config.toolbar%"
         }
       }
     }

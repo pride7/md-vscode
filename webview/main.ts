@@ -12,6 +12,7 @@ import { getStrings, type Strings } from './i18n';
 import { imageAt, showImagePreview } from './imagePreview';
 import { configureMarkdown, splitFrontMatter } from './markdownFormat';
 import { TableOfContents } from './toc';
+import { Toolbar } from './toolbar';
 
 interface VsCodeApi {
   postMessage(message: unknown): void;
@@ -21,6 +22,7 @@ declare function acquireVsCodeApi(): VsCodeApi;
 interface WebviewConfig {
   maxWidth: number;
   tableOfContents: boolean;
+  toolbar: boolean;
 }
 
 /** Messages the extension sends to the webview. */
@@ -43,6 +45,7 @@ let pendingText: string | undefined;
 let frontMatter = '';
 let strings: Strings = getStrings('en');
 let toc: TableOfContents | undefined;
+let toolbar: Toolbar | undefined;
 
 let nextUploadId = 1;
 const pendingUploads = new Map<number, { resolve: (url: string) => void; reject: (err: Error) => void }>();
@@ -88,6 +91,7 @@ async function init(text: string, language: string, config: WebviewConfig): Prom
   initializing = true;
   strings = getStrings(language);
   toc = new TableOfContents(strings.tableOfContents);
+  toolbar = new Toolbar(strings);
   applyConfig(config);
 
   const { frontMatter: initialFrontMatter, body } = splitFrontMatter(text);
@@ -98,7 +102,7 @@ async function init(text: string, language: string, config: WebviewConfig): Prom
     featureConfigs: featureConfigs(strings),
   });
   configureMarkdown(editor.editor);
-  editor.editor.use(toc.plugin);
+  editor.editor.use(toc.plugin).use(toolbar.plugin);
   // Ctrl/Cmd+E switches to the source view. Keys reach VS Code's keybindings
   // even when the editor handles them, so it must not also toggle inline code.
   editor.editor.config((ctx) => {
@@ -261,6 +265,7 @@ function applyConfig(config: WebviewConfig): void {
   const width = config.maxWidth > 0 ? `${config.maxWidth}px` : 'none';
   document.documentElement.style.setProperty('--md-max-width', width);
   toc?.setEnabled(config.tableOfContents);
+  toolbar?.setEnabled(config.toolbar);
 }
 
 function uploadImage(file: File): Promise<string> {

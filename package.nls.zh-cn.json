@@ -8,5 +8,6 @@
   "command.toggleEditor": "切换源码 / 所见即所得",
   "config.imageFolder": "粘贴或拖入的图片保存到哪个文件夹（相对于 Markdown 文件）。留空则与文件保存在同一目录。",
   "config.maxWidth": "编辑区域的最大宽度（像素）。`0` 表示占满整个宽度。",
-  "config.tableOfContents": "在编辑器右侧显示目录。鼠标移上去会列出所有标题，点击即可跳转。"
+  "config.tableOfContents": "在编辑器右侧显示目录。鼠标移上去会列出所有标题，点击即可跳转。",
+  "config.toolbar": "在编辑器顶部显示格式工具栏。"
 }

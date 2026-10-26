@@ -16,6 +16,7 @@ ext install pride7.verso
 
 - **WYSIWYG editing**: headings, lists, task lists, blockquotes, tables, links and images are edited the way they render
 - **Slash menu**: type `/` to insert headings, lists, code blocks, tables, math, images and more
+- **Toolbar**: pinned to the top of the editor, for paragraphs and headings, bold, italic, strikethrough, lists, quotes, links and images. The ⋯ button has inline code, code blocks, math, tables and dividers. Buttons light up to show the formatting at the cursor
 - **Formatting toolbar**: appears when you select text, with bold, italic, strikethrough, inline code and links
 - **Drag handles**: hover to the left of a paragraph to drag the whole block, or insert a new block below it
 - **Code blocks**: CodeMirror with syntax highlighting and a language picker
@@ -57,6 +58,7 @@ By default the extension does not change how `.md` files open. To open them in W
 | `mdWysiwyg.imageFolder` | `assets` | Folder, relative to the Markdown file, where pasted or dropped images are saved. Leave empty to save them next to the file |
 | `mdWysiwyg.maxWidth` | `0` | Maximum width of the editing area in pixels. `0` uses the full width |
 | `mdWysiwyg.tableOfContents` | `true` | Show the floating table of contents at the right edge of the editor (it appears only when there are at least two headings) |
+| `mdWysiwyg.toolbar` | `true` | Show the formatting toolbar at the top of the editor |
 
 ## Known limitations
 

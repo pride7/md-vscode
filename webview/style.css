@@ -44,7 +44,7 @@ body {
 
 .milkdown .ProseMirror {
   max-width: var(--md-max-width, none);
-  min-height: 100vh;
+  min-height: calc(100vh - var(--toolbar-height, 0px));
   margin: 0 auto;
   /* Left room is for the block drag handle. */
   padding: 40px 64px 30vh;
@@ -171,10 +171,134 @@ body {
   display: none;
 }
 
+/* Toolbar pinned to the top of the page (toolbar.ts). Its buttons line up
+   with the start of the text. */
+#toolbar {
+  position: sticky;
+  top: 0;
+  /* Above the table handles, like the table of contents. */
+  z-index: 100;
+  border-bottom: 1px solid var(--vscode-textSeparator-foreground, var(--vscode-widget-border, transparent));
+  background: var(--vscode-editor-background);
+  font-family: var(--vscode-font-family);
+}
+/* Crepe's floating menus stay above the toolbar when their text scrolls under it. */
+.milkdown :is(.milkdown-toolbar, .milkdown-slash-menu, .milkdown-link-preview, .milkdown-link-edit) {
+  z-index: 101;
+}
+/* But the toolbar's own menu, while open, goes above them. */
+#toolbar:has(.toolbar-menu:not([hidden])) {
+  z-index: 102;
+}
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  box-sizing: border-box;
+  max-width: var(--md-max-width, none);
+  margin: 0 auto;
+  padding: 6px 59px;
+}
+@media (max-width: 600px) {
+  .toolbar-row {
+    padding: 6px 19px 6px 43px;
+  }
+}
+.toolbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: var(--vscode-icon-foreground, var(--vscode-editor-foreground));
+  cursor: pointer;
+}
+.toolbar-button svg {
+  width: 18px;
+  height: 18px;
+}
+.toolbar-button:hover,
+.toolbar-button[aria-expanded='true'] {
+  background: var(--vscode-toolbar-hoverBackground, var(--vscode-list-hoverBackground));
+}
+.toolbar-button:is([aria-pressed='true'], .active) {
+  background: var(--vscode-inputOption-activeBackground, var(--vscode-editor-selectionBackground));
+  color: var(--vscode-inputOption-activeForeground, var(--vscode-editor-foreground));
+}
+.toolbar-button[aria-disabled='true'],
+.toolbar-menu-item[aria-disabled='true'] {
+  background: none;
+  opacity: 0.4;
+  cursor: default;
+}
+.toolbar-button:focus-visible,
+.toolbar-menu-item:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+.toolbar-separator {
+  width: 1px;
+  height: 18px;
+  margin: 0 6px;
+  background: var(--vscode-textSeparator-foreground, var(--vscode-widget-border, transparent));
+}
+.toolbar-more {
+  position: relative;
+}
+.toolbar-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  padding: 4px;
+  border: 1px solid var(--vscode-editorWidget-border, var(--vscode-widget-border, transparent));
+  border-radius: 6px;
+  background: var(--vscode-editorWidget-background);
+  box-shadow: 0 2px 8px var(--vscode-widget-shadow, rgba(0, 0, 0, 0.3));
+}
+.toolbar-menu[hidden] {
+  display: none;
+}
+.toolbar-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: var(--vscode-editorWidget-foreground, var(--vscode-editor-foreground));
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.toolbar-menu-item svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+.toolbar-menu-item:hover {
+  background: var(--vscode-list-hoverBackground);
+  color: var(--vscode-list-hoverForeground, var(--vscode-editorWidget-foreground, var(--vscode-editor-foreground)));
+}
+.toolbar-menu-item[aria-pressed='true'] {
+  color: var(--vscode-textLink-foreground);
+}
+
 /* Table of contents at the right edge (toc.ts): a dash per heading, which
    expands into the list of headings on hover. */
 .milkdown .ProseMirror :is(h1, h2, h3, h4, h5, h6) {
-  scroll-margin-top: 24px;
+  scroll-margin-top: calc(var(--toolbar-height, 0px) + 24px);
 }
 #toc {
   position: fixed;

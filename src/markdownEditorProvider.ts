@@ -13,6 +13,7 @@ type WebviewMessage =
 interface WebviewConfig {
   maxWidth: number;
   tableOfContents: boolean;
+  toolbar: boolean;
 }
 
 const MARKDOWN_FILE = /\.(md|markdown)$/i;
@@ -299,6 +300,7 @@ class EditorSession implements vscode.Disposable {
     return {
       maxWidth: config.get<number>('maxWidth', 0),
       tableOfContents: config.get<boolean>('tableOfContents', true),
+      toolbar: config.get<boolean>('toolbar', true),
     };
   }
 

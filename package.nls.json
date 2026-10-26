@@ -8,5 +8,6 @@
   "command.toggleEditor": "Toggle Source / WYSIWYG",
   "config.imageFolder": "Folder, relative to the Markdown file, where pasted or dropped images are saved. Leave empty to save next to the file.",
   "config.maxWidth": "Maximum width of the editing area in pixels. `0` uses the full width.",
-  "config.tableOfContents": "Show a table of contents at the right edge of the editor. Hover it to list the headings, and click one to jump to it."
+  "config.tableOfContents": "Show a table of contents at the right edge of the editor. Hover it to list the headings, and click one to jump to it.",
+  "config.toolbar": "Show a formatting toolbar at the top of the editor."
 }
