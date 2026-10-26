@@ -3,7 +3,17 @@
   "displayName": "%displayName%",
   "description": "%description%",
   "version": "0.1.0",
-  "publisher": "xsfeng",
+  "publisher": "pride7",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pride7/md-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pride7/md-vscode/issues"
+  },
+  "homepage": "https://github.com/pride7/md-vscode#readme",
   "engines": {
     "vscode": "^1.90.0"
   },
@@ -137,7 +147,7 @@
     "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"test/**/*.test.mts\"",
     "test:e2e": "npm run build && node test/e2e/runTest.mjs",
     "vscode:prepublish": "node esbuild.mjs --production",
-    "package": "vsce package --skip-license --allow-missing-repository",
+    "package": "vsce package",
     "install-local": "npm run package -- -o md-wysiwyg.vsix && code --install-extension md-wysiwyg.vsix --force"
   },
   "devDependencies": {
